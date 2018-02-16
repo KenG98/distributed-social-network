@@ -4,14 +4,12 @@ Distributed Social Network (yet to be named) is a MakeBU project.
 
 ## Authors:
 
-* Joseph Lai
-* Hayato Nakamura
 * Emmanuel Amponsah
-* William Pine
-* Shoki Ko
-* Tri Hoang
+* Hayato Nakamura
+* Joseph Lai
 * Ken Garber
-* Radhey Patel
+* Shoki Ko
+* William Pine
 
 ## Flowchart Overview
 * User starts the program (their server), and it either creates its own network or joins a specified network.
