@@ -10,7 +10,7 @@ main {
 
 #chat-messages {
     min-height: 10vh;
-    height: 60vh;
+    height: 70vh;
     width: 100%;
     overflow-y: scroll;
 }
