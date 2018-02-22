@@ -10,7 +10,18 @@ main {
 
 #chat-messages {
     min-height: 10vh;
-    height: 70vh;
+    height: 75vh;
     width: 100%;
     overflow-y: scroll;
+}
+
+#login-box {
+    min-height: 10vh;
+    height: 75vh;
+    width: 100%;
+}
+
+#sidenav {
+  min-height: 10vh;
+  height: 84vh;
 }
