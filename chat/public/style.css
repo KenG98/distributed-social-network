@@ -16,9 +16,10 @@ main {
 }
 
 #login-box {
-    min-height: 10vh;
+    min-height: 650px;
     height: 75vh;
     width: 100%;
+    overflow-y: auto;
 }
 
 #sidenav {
