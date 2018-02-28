@@ -8,16 +8,21 @@ import (
 )
 
 var clients = make(map[*websocket.Conn]bool)
-var broadcast = make(chan Message)
+var broadcast = make(chan Data)
 
 // Upgrader takes normal HTTP connection and upgrades it to a WebSocket
 var upgrader = websocket.Upgrader{}
 
-// Definition of the message object
-type Message struct{
-  Email string `json:"email"`
+// Definition of the data object (formerly Message object)
+type Data struct{
+  Timestamp string `json:"timestamp"`
   Username string `json:"username"`
-  Message string `json:"message"`
+  Action string `json:"action"`
+  Contents string `json:"contents"`
+  // e.g. to send message, action would be 'message' and contents would be the message
+  // Other ctions include joining server, leaving server, changing username
+  // Add authentication in future but will require another struct
+  // Changed: Added timestamp field, removed email field
 }
 
 func main() {
@@ -53,26 +58,29 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
   clients[ws] = true
 
   for {
-    var msg Message
-    // Read in message as JSON and map to message object
-    err := ws.ReadJSON(&msg)
+    var incData Data
+    // Read in data/message as JSON and map to data object
+    err := ws.ReadJSON(&incData)
     if err != nil {
       log.Printf("error: %v", err)
       delete(clients, ws)
       break
     }
+    // Debugging log to console feature
+    log.Printf("%s: %s\n", incData.Username, incData.Contents)
     // Send newly received message to broadcast channel
-    broadcast <- msg
+    broadcast <- incData
   }
 }
 
 func handleMessages() {
   for {
     // Grab next message from broadcast channel
-    msg := <-broadcast
+    incData := <-broadcast
+    // Add function to save message to database file on server
     // Send out to every client connected
     for client := range clients {
-      err := client.WriteJSON(msg)
+      err := client.WriteJSON(incData)
       if err != nil {
         log.Printf("error: %v", err)
         client.Close()
