@@ -49,13 +49,6 @@ func (db *ChatDB) SaveToDisk(fn string) error {
 	if err == nil {
 		encoder := gob.NewEncoder(file)
 		encoder.Encode(*db)
-		// for _, r := range db.rooms {
-		// 	encoder.Encode(r)
-		// 	for _, m := range r.messages {
-		// 		encoder.Encode(m)
-		// 	}
-		// }
-		// encoder.Encode(db.rooms)
 	}
 	file.Close()
 	return err
