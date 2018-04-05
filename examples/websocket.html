@@ -1,0 +1,28 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <input id="input" type="text" />
+      <button onclick="post()">Send</button>
+      <p id="output"></p>
+      <script>
+        	var input = document.getElementById("input");
+        	var output = document.getElementById("output");
+        	var socket = new WebSocket("ws://localhost:8080/test");
+
+        	socket.onopen = function () {
+        		output.innerHTML += "Welcome to DSN\n";
+        	};
+
+        	socket.onmessage = function (message) {
+        		output.innerHTML += "Ken: " + message.data + "\n";
+        	};
+
+        	function post() {
+        		socket.send(input.value);
+        		input.value = "";
+        	}
+      </script>
+  </body>
+
+</html>
