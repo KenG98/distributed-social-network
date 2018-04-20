@@ -34,3 +34,14 @@ Distributed Social Network (yet to be named) is a MakeBU project.
   * Front end (in browser)
 * Database layer
 
+## Running the project
+
+* Have Go installed
+* Navigate to the project repository
+* Set your GOPATH variable to that directory. You can do this with `GOPATH=$(pwd)` on mac or linux. There's probably a way on Windows, too.
+* Use `go build cli` to build the project
+* Run the program with one of two commands - the "start" command if you're starting a new network, or the "join" command if you're joining a network. The arguments are self explanatory.
+  * ./cli start myIpAddr myPort myName
+  * ./cli join friendIpAddr friendPort myIpAddr myPort myName
+* Now type and hit enter to send messages!
+
